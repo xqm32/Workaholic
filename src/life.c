@@ -1,43 +1,44 @@
 #include "life.h"
 
-static int live(long long sign_hunger, long long sign_power,
-	long long sign_health, long long sign_money) {
-		long long temp_hunger=rand()%(full_hunger/10);
-		long long temp_power=rand()%(full_power/10);
-		long long temp_health=rand()%(full_health/10);
-		long long temp_money=rand()%((full_hunger+full_power+full_health)/30);
-		hunger+=sign_hunger*temp_hunger;
-		power+=sign_power*temp_power;
-		health+=sign_health*temp_health;
-		money+=sign_money*temp_money;
+static int algorithm(attribute sign_hunger, attribute sign_power,
+	attribute sign_health, attribute sign_money, date_type expected_time) {
+		date_type temp_time=rand()%(int)expected_time;
+		attribute temp_hunger=sign_hunger*(rand()%(int)full_hunger);
+		attribute temp_power=sign_power*(rand()%(int)full_power);
+		attribute temp_health=sign_health*(rand()%(int)full_health);
+		attribute temp_money=sign_money*(rand()%(int)((full_hunger+full_power+full_health)/3));
+		if (money<-temp_money) {
+#ifdef IN_DEBT
+			printf("=> [Warning]: You are in debt.\n");
+#else
+			printf("=> [Warning]: You have not enough money to do it.\n");
+			return 1;
+#endif
+		}
+		current_time+=temp_time;
+		hunger+=temp_hunger;
+		power+=temp_power;
+		health+=temp_health;
+		money+=temp_money;
 		return 0;
 	}
 
 int eat() {
-	live(1, 1, -1, -1);
+	algorithm(EAT);
 	return 0;
 }
 
 int sleep() {
-	live(-1, 1, 1, -1);
+	algorithm(SLEEP);
 	return 0;
 }
 
 int cure() {
-	live(1, -1, 1, -1);
+	algorithm(CURE);
 	return 0;
 }
 
 int work() {
-	live(-1, -1, 1, 1);
+	algorithm(WORK);
 	return 0;
 }
-
-/*
-	Relationship:
-	Event	Hunger	Power	Health	Money
-	Eat		+		+		-		-
-	Sleep	-		+		+		-
-	Cure	+		-		+		-
-	Work	-		-		+		+
- */

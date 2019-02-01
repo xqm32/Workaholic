@@ -1,24 +1,32 @@
 #include "life.h"
 
 static void printinfo() {
-	printf("Hunger: %lld/%lld\n"
-		"Power: %lld/%lld\n"
-		"Health: %lld/%lld\n"
-		"Money: %lld\n"
-		"$ ", \
-		hunger, full_hunger, \
-		power, full_power, \
-		health, full_health, \
+	printf("Day "DAY_FORMAT", "TIME_FORMAT":"TIME_FORMAT":"TIME_FORMAT"\n", \
+		current_time/86400, current_time/3600%24, \
+		current_time/60%60, current_time%60);
+	printf("Hunger: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
+		"Power:  "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
+		"Health: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
+		"Money:  $"ATTR_FORMAT"\n", \
+		hunger, full_hunger, hunger/full_hunger*100, \
+		power, full_power, power/full_power*100, \
+		health, full_health, health/full_health*100, \
 		money);
 }
 
+static void wait() {
+	printf("-> ");
+}
+
 static void gameover() {
-	printf("Game over.\n");
+	printinfo();
+	printf("=> Game over.\n");
 }
 
 static int menu() {
 	srand(time(NULL));
 	printinfo();
+	wait();
 	for (;;) {
 		for (int ch=getchar(); ch!='\n'; ch=getchar()) {
 			switch(ch) {
@@ -55,6 +63,7 @@ static int menu() {
 				return 0;
 			}
 			printinfo();
+			wait();
 		}
 	}
 	return 1;
