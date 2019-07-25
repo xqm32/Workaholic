@@ -2,8 +2,8 @@
 
 static void printinfo() {
 	printf("Day "DAY_FORMAT", "TIME_FORMAT":"TIME_FORMAT":"TIME_FORMAT"\n", \
-		current_time/86400, current_time/3600%24, \
-		current_time/60%60, current_time%60);
+		current_time STD, current_time STH, \
+		current_time STM, current_time STS);
 	printf("Health[Cure]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"
 		"Hunger [Eat]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"
 		"Power[Sleep]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"

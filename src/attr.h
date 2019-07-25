@@ -16,6 +16,11 @@ typedef long long date_type;
 #define MINUTES *60
 #define SECONDS *1
 
+#define STD /86400
+#define STH /3600%24
+#define STM /60%60
+#define STS %60
+
 extern attribute hunger, power, health, money;
 extern attribute full_hunger, full_power, full_health;
 extern date_type current_time;
