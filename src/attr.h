@@ -27,4 +27,8 @@ extern date_type current_time;
 #define LOW_POWER_WARNING "=> [Warning]: Low power.\n"
 #define LOW_HEALTH_WARNING "=> [Warning]: Low health.\n"
 
+#define LOW_HEA_STR health<full_health*LOW_HEALTH?"[LOW]":""
+#define LOW_HUN_STR hunger<full_hunger*LOW_HUNGER?"[LOW]":""
+#define LOW_POW_STR power<full_power*LOW_POWER?"[LOW]":""
+
 int check();

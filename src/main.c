@@ -4,18 +4,19 @@ static void printinfo() {
 	printf("Day "DAY_FORMAT", "TIME_FORMAT":"TIME_FORMAT":"TIME_FORMAT"\n", \
 		current_time/86400, current_time/3600%24, \
 		current_time/60%60, current_time%60);
-	printf("Hunger: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
-		"Power:  "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
-		"Health: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"\n"
-		"Money:  $"ATTR_FORMAT"\n", \
-		hunger, full_hunger, hunger/full_hunger*100, \
-		power, full_power, power/full_power*100, \
-		health, full_health, health/full_health*100, \
+	printf("Health[Cure]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"
+		"Hunger [Eat]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"
+		"Power[Sleep]: "PER_ATTR_FORMAT_FORMAT" "PERCENT_FORMAT"%s\n"
+		"Money [Work]: $"ATTR_FORMAT"\n", \
+		health, full_health, health/full_health*100, LOW_HEA_STR, \
+		hunger, full_hunger, hunger/full_hunger*100, LOW_HUN_STR, \
+		power, full_power, power/full_power*100, LOW_POW_STR, \
 		money);
 }
 
 static void wait() {
-	printf("-> ");
+	printf("[C/E/S/W/X]\n"
+		"-> ");
 }
 
 static void gameover() {
