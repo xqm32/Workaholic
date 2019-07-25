@@ -22,7 +22,7 @@ static int overflow(attribute *current, attribute *full) {
 }
 
 static int checklow(attribute current, attribute lowlimit, const char *warning) {
-	if (current<lowlimit) {
+	if (current<=lowlimit) {
 		printf("%s", warning);
 	}
 	return 0;
